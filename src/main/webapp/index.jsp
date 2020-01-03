@@ -34,7 +34,7 @@
 		over the world.</div>
 	<div id="intro2" class="body">Create an account</div>
 	<!-- <div id="img2" class="body"><img src="" /></div> -->
-	<form id="sign-up-form" class="body" action="#" method="post">
+	<form id="sign-up-form" class="body" action="${pageContext.request.contextPath}/register" method="post">
 		<input class="input-box" placeholder="First Name" type="text" name="firstName" />
 		<input class="input-box" placeholder="Last Name" type="text" name="lastName"  /> <br>
 		<input class="input-box" id="mailbox" placeholder="Username" type="text" name="username" /><br>
