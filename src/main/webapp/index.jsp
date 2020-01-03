@@ -35,12 +35,12 @@
 	<div id="intro2" class="body">Create an account</div>
 	<!-- <div id="img2" class="body"><img src="" /></div> -->
 	<form id="sign-up-form" class="body" action="${pageContext.request.contextPath}/register" method="post">
-		<input class="input-box" placeholder="First Name" type="text" name="firstName" />
-		<input class="input-box" placeholder="Last Name" type="text" name="lastName"  /> <br>
-		<input class="input-box" id="mailbox" placeholder="Username" type="text" name="username" /><br>
-		<input class="input-box" id="mailbox" placeholder="Email" type="email" name="email" /><br>
-		<input class="input-box" id="mailbox" placeholder="Password" type="password" name="password"  /><br>
-		<input class="input-box" type="date" name="birth-date"  /><br><br>
+		<input class="input-box" placeholder="First Name" type="text" name="firstName" required />
+		<input class="input-box" placeholder="Last Name" type="text" name="lastName" required /> <br>
+		<input class="input-box" id="mailbox" placeholder="Username" type="text" name="username" required /><br>
+		<input class="input-box" id="mailbox" placeholder="Email" type="email" name="email" required /><br>
+		<input class="input-box" id="mailbox" placeholder="Password" type="password" name="password" required /><br>
+		<input class="input-box" type="date" name="birth-date" required /><br><br>
 		<input class="log-in-btn" id="sign-up-btn" type="submit" value="Create an account" />
 		<br><hr>
 	</form>
