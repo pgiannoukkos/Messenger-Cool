@@ -1,35 +1,15 @@
 package www.project.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "user")
 public class User {
 
-	@Id
-	@Column(name = "id")
-	private Integer id;
-
-	@Column(name = "first_name")
+	private int id;
 	private String firstName;
-
-	@Column(name = "last_name")
 	private String lastName;
-
-	@Column(name = "username")
 	private String username;
-
-	@Column(name = "email")
 	private String email;
-
-	@Column(name = "password")
 	private String password;
-
-	@Column(name = "birthdate")
 	private LocalDate birthDate;
 
 	public Integer getId() {
