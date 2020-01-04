@@ -5,9 +5,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.loader.custom.sql.SQLCustomQuery;
+import org.hibernate.query.NativeQuery;
 import www.project.bean.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserDAO {
 
@@ -34,5 +37,29 @@ public class UserDAO {
 			System.out.println(e.getMessage());
 			System.out.println("error");
 		}
+	}
+
+	public boolean userExists(String userName, String email) {
+		Configuration configuration = new Configuration().configure();
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		String hql = "SELECT username, email FROM user WHERE username=:username OR email=:email";
+		NativeQuery query = session.createSQLQuery(hql);
+		query.setParameter("username", userName);
+		query.setParameter("email", email);
+
+		List res = query.list();
+
+		if (!res.isEmpty()) {
+			System.out.println("\n\n User Exists \n");
+			session.close();
+			sessionFactory.close();
+			return true;
+		}
+
+		session.close();
+		sessionFactory.close();
+		return false;
 	}
 }

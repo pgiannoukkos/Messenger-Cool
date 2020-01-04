@@ -35,6 +35,7 @@
 	<div id="intro2" class="body">Create an account</div>
 	<!-- <div id="img2" class="body"><img src="" /></div> -->
 	<form id="sign-up-form" class="body" action="${pageContext.request.contextPath}/register" method="post">
+		<p>${register_message}</p>
 		<input class="input-box" placeholder="First Name" type="text" name="firstName" required />
 		<input class="input-box" placeholder="Last Name" type="text" name="lastName" required /> <br>
 		<input class="input-box" id="mailbox" placeholder="Username" type="text" name="username" required /><br>

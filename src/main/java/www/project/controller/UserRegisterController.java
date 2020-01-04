@@ -23,7 +23,14 @@ public class UserRegisterController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		try {
 			UserDAO userDAO = new UserDAO();
-			userDAO.createUser(firstName, lastName, username, email, password, birthDate);
+			if (userDAO.userExists(username, email)) {
+				request.setAttribute("register_message", "User already Exists!");
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			} else {
+				userDAO.createUser(firstName, lastName, username, email, password, birthDate);
+				request.setAttribute("register_message", "Success!");
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
