@@ -25,7 +25,7 @@ public class UserDAO {
 		Session session = sessionFactory.openSession();
 
 		// SQL query
-		String hql = "SELECT * FROM users WHERE uname = :userName";
+		String hql = "SELECT * FROM user WHERE username = :userName";
 		NativeQuery query = session.createNativeQuery(hql, User.class);
 		query.setParameter("userName", userName);
 
@@ -104,11 +104,12 @@ public class UserDAO {
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 
-		String hql = "FROM user WHERE username=:username";
-		NativeQuery query = session.createSQLQuery(hql);
+		String hql = "SELECT * FROM user WHERE username=:username";
+		NativeQuery query = session.createNativeQuery(hql, User.class);
 		query.setParameter("username", userName);
 
 		User existingUser = (User) query.uniqueResult();
+		System.out.println(existingUser.getUsername());
 
 		return existingUser;
 	}

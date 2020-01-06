@@ -23,7 +23,7 @@ public class UserLoginController extends HttpServlet {
 			} else {
 				User user = userDAO.getUser(userName);
 				response.addCookie(new Cookie("userId", user.getId().toString()));
-				response.sendRedirect("/main.jsp");
+				response.sendRedirect("./main.jsp");
 			}
 
 		} catch (HibernateException ex) {
