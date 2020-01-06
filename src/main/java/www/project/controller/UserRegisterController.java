@@ -15,7 +15,7 @@ public class UserRegisterController extends HttpServlet {
 
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String username = request.getParameter("username");
+		String username = request.getParameter("username").toLowerCase();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		LocalDate birthDate = LocalDate.parse(request.getParameter("birth-date"));
