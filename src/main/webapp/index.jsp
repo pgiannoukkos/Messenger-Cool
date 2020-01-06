@@ -23,7 +23,7 @@
 <div class="header">
 	<h1>Messenger Cool</h1>
 	<!-- <div id="img1" class="header"><img src="" /></div> -->
-	<form class="log-in-form" action="#" method="post">
+	<form class="log-in-form" action="${pageContext.request.contextPath}/login" method="post">
 		<input class="input-box" placeholder="Username" type="text" name="username" required />
 		<input class="input-box" placeholder="Password" type="password" name="password" required />
 		<input class="log-in-btn" type="submit" value="Log In">

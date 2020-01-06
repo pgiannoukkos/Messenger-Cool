@@ -13,6 +13,43 @@ import java.util.List;
 
 public class UserDAO {
 
+	public boolean checkUserLogin(String userName, String password) {
+
+		// Configure Hibernate
+		Configuration configuration = new Configuration().configure();
+
+		// Create SessionFactory
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+		// Get Session object
+		Session session = sessionFactory.openSession();
+
+		// SQL query
+		String hql = "SELECT * FROM users WHERE uname = :userName";
+		NativeQuery query = session.createNativeQuery(hql, User.class);
+		query.setParameter("userName", userName);
+
+		User existingUser = (User) query.uniqueResult();
+
+		if (existingUser == null) {
+			System.out.println("\n\n User not Found \n");
+			session.close();
+			sessionFactory.close();
+			return true;
+		} else {
+			if (!existingUser.getPassword().equals(password)) {
+				System.out.println("\n\n Wrong Password! \n");
+				session.close();
+				sessionFactory.close();
+				return true;
+			}
+		}
+
+		session.close();
+		sessionFactory.close();
+		return false;
+	}
+
 	public void createUser(String firstName, String lastName, String username, String email, String password,
 						   LocalDate birthDate) {
 		try {
