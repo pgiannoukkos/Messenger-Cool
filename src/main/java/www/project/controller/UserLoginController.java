@@ -1,13 +1,11 @@
 package www.project.controller;
 
 import org.hibernate.HibernateException;
+import www.project.bean.User;
 import www.project.dao.UserDAO;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 public class UserLoginController extends HttpServlet {
@@ -23,8 +21,9 @@ public class UserLoginController extends HttpServlet {
 				request.setAttribute("message", "Wrong username or password!");
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
-				request.setAttribute("username", userName);
-				getServletContext().getRequestDispatcher("/hello.jsp").forward(request, response);
+				User user = userDAO.getUser(userName);
+				response.addCookie(new Cookie("userId", user.getId().toString()));
+				response.sendRedirect("/main.jsp");
 			}
 
 		} catch (HibernateException ex) {

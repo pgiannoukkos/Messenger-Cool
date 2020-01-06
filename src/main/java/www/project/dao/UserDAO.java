@@ -98,4 +98,18 @@ public class UserDAO {
 		sessionFactory.close();
 		return false;
 	}
+
+	public User getUser(String userName) {
+		Configuration configuration = new Configuration().configure();
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		String hql = "FROM user WHERE username=:username";
+		NativeQuery query = session.createSQLQuery(hql);
+		query.setParameter("username", userName);
+
+		User existingUser = (User) query.uniqueResult();
+
+		return existingUser;
+	}
 }
