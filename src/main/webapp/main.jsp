@@ -51,7 +51,7 @@
 //                        writer.println(user.getFirstName() + " " + user.getLastName());
                         String full = user.getFirstName() + " " + user.getLastName();
                     %>
-                    <h2><%=full%></h2>
+                    <%=full%>
                 </div>
             </div>
         </div>
