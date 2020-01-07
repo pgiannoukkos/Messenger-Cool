@@ -1,13 +1,13 @@
 package www.project.bean;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 public class Messages {
 
 	private int sender;
 	private int receiver;
 	private String msg;
-	private LocalDate timestamp;
+	private Timestamp timestamp;
 
 	public int getSender() {
 		return sender;
@@ -33,11 +33,11 @@ public class Messages {
 		this.msg = msg;
 	}
 
-	public LocalDate getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDate timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 }
