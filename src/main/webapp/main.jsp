@@ -1,4 +1,4 @@
-<%--
+<%@ page import="www.project.dao.UserDAO" %><%--
   Created by IntelliJ IDEA.
   User: gio
   Date: 06/01/2020
@@ -21,6 +21,11 @@
 </head>
 <body>
 
+<%
+    UserDAO userDAO = new UserDAO();
+
+%>
+
 <div class="wrapper">
     <header>
         <div class="container">
@@ -42,7 +47,7 @@
     <main>
         <div class="col-left">
             <div class="col-content">
-                <div class="messages">
+                <div class="messages" id="msg">
 
                     <li>
                         <h3>Giorgos Simos</h3>
@@ -75,7 +80,7 @@
         <div class="col">
             <div class="col-content">
                 <section class="message">
-                    <div class="grid-message">
+                    <div class="grid-message" id="message">
                         <div class="col-message-received">
                             <div class="message-received">
                                 <p>Ok.</p>
@@ -116,7 +121,6 @@
             <div class="col-foot">
 
                 <div class="compose">
-
                     <input placeholder="Type a message">
                     <div class="compose-dock">
                     </div>
@@ -142,7 +146,7 @@
 </div>
 
 
-
+<script src="test.js"></script>
 
 </body>
 </html>
