@@ -9,13 +9,6 @@ public class Messages {
 	private String msg;
 	private LocalDate timestamp;
 
-	public Messages(int sender, int receiver, String msg, LocalDate timestamp) {
-		this.sender = sender;
-		this.receiver = receiver;
-		this.msg = msg;
-		this.timestamp = timestamp;
-	}
-
 	public int getSender() {
 		return sender;
 	}

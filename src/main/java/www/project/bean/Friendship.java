@@ -5,11 +5,6 @@ public class Friendship {
 	private int user1;
 	private int user2;
 
-	public Friendship(int user1, int user2) {
-		this.user1 = user1;
-		this.user2 = user2;
-	}
-
 	public int getUser1() {
 		return user1;
 	}
