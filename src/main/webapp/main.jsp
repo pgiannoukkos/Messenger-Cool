@@ -35,22 +35,23 @@
 
             <div class="right">
                 <div class="username">
-<%--                    <%--%>
-<%--                        int userId = 0;--%>
-<%--                        Cookie[] cookies = request.getCookies();--%>
-<%--                        for (Cookie cookie : cookies) {--%>
-<%--                            if (cookie.getName().equals("userId"))--%>
-<%--                            	userId = Integer.parseInt(cookie.getValue());--%>
-<%--                        }--%>
-<%--                        UserDAO userDAO = new UserDAO();--%>
-<%--                        User user = null;--%>
-<%--                        if (userId != 0) {--%>
-<%--                            user = userDAO.getUser(userId);--%>
-<%--                        }--%>
-<%--                        PrintWriter writer = response.getWriter();--%>
-<%--                        writer.println(user.getFirstName() + " " + user.getLastName());--%>
-
-<%--                    %>--%>
+                    <%
+                        int userId = 0;
+                        Cookie[] cookies = request.getCookies();
+                        for (Cookie cookie : cookies) {
+                            if (cookie.getName().equals("userId"))
+                            	userId = Integer.parseInt(cookie.getValue());
+                        }
+                        UserDAO userDAO = new UserDAO();
+                        User user = null;
+                        if (userId != 0) {
+                            user = userDAO.getUser(userId);
+                        }
+//                        PrintWriter writer = response.getWriter();
+//                        writer.println(user.getFirstName() + " " + user.getLastName());
+                        String full = user.getFirstName() + " " + user.getLastName();
+                    %>
+                    <h2><%=full%></h2>
                 </div>
             </div>
         </div>
