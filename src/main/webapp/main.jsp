@@ -1,6 +1,7 @@
 <%@ page import="www.project.dao.UserDAO" %>
 <%@ page import="www.project.bean.User" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="www.project.dao.FriendshipDAO" %><%--
   Created by IntelliJ IDEA.
   User: gio
   Date: 06/01/2020
@@ -50,6 +51,10 @@
         <div class="col-left">
             <div class="col-content">
                 <div class="messages" id="msg">
+                    <%
+                        FriendshipDAO friendshipDAO = new FriendshipDAO();
+
+                    %>
 
                     <li>
                         <h3>Giorgos Simos</h3>

@@ -9,6 +9,8 @@ import www.project.bean.Friendship;
 
 public class FriendshipDAO {
 
+	public List<>
+
 	public void createFriendship(int user1, int user2) {
 
 		try {
