@@ -11,16 +11,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class MessagesDAOTest {
 
 	@Test
-	void getMessages() {
-		MessagesDAO dao = new MessagesDAO();
-		UserDAO userDAO = new UserDAO();
-		List<Messages> list = dao.getAllMessages(1, 3);
+	void addMessages() {
 
-		for (Messages message: list) {
-			User sender = userDAO.getUser(message.getSender());
-			User receiver = userDAO.getUser(message.getReceiver());
-			System.out.println(sender.getFirstName() + " to " + receiver.getFirstName() + " : " + message.getMsg()
-			+ " at: " + message.getTimestamp());
+		MessagesDAO messagesDAO = new MessagesDAO();
+		messagesDAO.newMessage(1, 2, "man");
+		messagesDAO.newMessage(1, 2, "cool");
+		messagesDAO.newMessage(2, 1, "cool yes hey");
+	}
+
+	@Test
+	void getMessages() {
+
+		MessagesDAO messagesDAO = new MessagesDAO();
+		List<Messages> messages = messagesDAO.getAllMessages(1, 2);
+
+		for (Messages message : messages) {
+			System.out.println(message.getMsg());
 		}
 	}
 

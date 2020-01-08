@@ -5,11 +5,36 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import www.project.bean.Friendship;
+import www.project.bean.Messages;
+
+import java.util.List;
 
 public class FriendshipDAO {
 
-	public List<>
+	public List<Friendship> getFriendship(int user) {
+
+
+		// Configure Hibernate
+		Configuration configuration = new Configuration().configure();
+
+		// Create SessionFactory
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+		// Get Session object
+		Session session = sessionFactory.openSession();
+
+//		System.out.println(user);
+
+		String hql = "SELECT * FROM friendships WHERE user2=:user";
+		NativeQuery<Friendship> query = session.createNativeQuery(hql, Friendship.class);
+		query.setParameter("user", user);
+
+		List<Friendship> list = query.getResultList();
+
+		return list;
+	}
 
 	public void createFriendship(int user1, int user2) {
 

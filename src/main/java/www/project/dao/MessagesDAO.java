@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import www.project.bean.Messages;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class MessagesDAO {
@@ -28,8 +29,9 @@ public class MessagesDAO {
 
 			Messages messages = new Messages();
 			messages.setReceiver(receiver);
-			messages.setReceiver(sender);
+			messages.setSender(sender);
 			messages.setMsg(msg);
+			messages.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
 			session.save(messages);
 			transaction.commit();
@@ -48,12 +50,19 @@ public class MessagesDAO {
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 
-		String hql = "SELECT * FROM messages WHERE sender=:sender AND receiver=:receiver";
+		System.out.println("sender" + sender);
+		System.out.println("receiver" + receiver);
+		String hql = "SELECT * FROM messages WHERE (sender=:sender AND receiver=:receiver) OR (sender=:receiver2 AND receiver=:sender2)";
 		NativeQuery<Messages> query = session.createNativeQuery(hql, Messages.class);
 		query.setParameter("sender", sender);
 		query.setParameter("receiver", receiver);
+		query.setParameter("sender2", sender);
+		query.setParameter("receiver2", receiver);
 
 		list = query.getResultList();
+//		for(Messages message:list) {
+//			System.out.println("Print list" + message.getMsg());
+//		}
 
 		return list;
 	}

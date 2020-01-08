@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="876d925e-69a8-4f99-b419-d1e2dd0505ff">
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="d922da7e-1aa9-4a71-8bd9-11aabf234e83">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate
 
-D:/pyian/Documents/IdeaProjects/Messenger-Cool/src/main/resources/hibernate.cfg.xml</remarks>
+/Users/gio/Documents/GitHub/Messenger-Cool/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/messengercool?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</jdbc-url>
     </data-source>

@@ -1,7 +1,11 @@
 <%@ page import="www.project.dao.UserDAO" %>
 <%@ page import="www.project.bean.User" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="www.project.dao.FriendshipDAO" %><%--
+<%@ page import="www.project.dao.FriendshipDAO" %>
+<%@ page import="www.project.bean.Friendship" %>
+<%@ page import="java.util.List" %>
+<%@ page import="www.project.dao.MessagesDAO" %>
+<%@ page import="www.project.bean.Messages" %><%--
   Created by IntelliJ IDEA.
   User: gio
   Date: 06/01/2020
@@ -24,24 +28,32 @@
 </head>
 <body>
 
+<%
+    FriendshipDAO friendshipDAO = new FriendshipDAO();
+    UserDAO userDAO = new UserDAO();
+    User user = userDAO.getUser((String) session.getAttribute("username"));
+    String userFullName = user.getFirstName() + " " + user.getLastName();
+    User friend = null;
+    List<Friendship> list = friendshipDAO.getFriendship(user.getId());
+    friend = userDAO.getUser((String) session.getAttribute("friend-uname"));
+    User currentFriend = userDAO.getUser((String) session.getAttribute("friend-uname"));
+    String friendName = friend.getFirstName() + " " + friend.getLastName();
+    String friendEmail = friend.getEmail();
+%>
+
 <div class="wrapper">
     <header>
         <div class="container">
             <div class="left"><h2>Messenger Cool</h2></div>
 
             <div class="middle">
-                <h3>Gio Simon</h3>
+                <h3><%=friendName%></h3>
                 <p>Messenger Cool</p>
             </div>
 
             <div class="right">
                 <div class="username">
-                    <%
-                        UserDAO userDAO = new UserDAO();
-                        User user = userDAO.getUser((String) session.getAttribute("username"));
-                        String full = user.getFirstName() + " " + user.getLastName();
-                    %>
-                    <%=full%>
+                    <%=userFullName%>
                 </div>
             </div>
         </div>
@@ -52,34 +64,21 @@
             <div class="col-content">
                 <div class="messages" id="msg">
                     <%
-                        FriendshipDAO friendshipDAO = new FriendshipDAO();
-
+                        for (Friendship friendship: list) {
+                        	friend = userDAO.getUser(friendship.getUser1());
+                        	String temp = friend.getFirstName() + " " + friend.getLastName();
+                        	String friendUname = friend.getUsername();
                     %>
 
                     <li>
-                        <h3>Giorgos Simos</h3>
-                        <p>Be there soon.</p>
+                        <form action="${pageContext.request.contextPath}/fetch" method="post">
+                            <input type="hidden" name="friend-uname" value="<%=friendUname%>">
+                            <button type="submit"><h3><%=temp%></h3></button>
+                        </form>
                     </li>
-
-                    <li>
-                        <h3>Panayiotis Yiannoukkos</h3>
-                        <p>You: Yep, let's do it!</p>
-                    </li>
-
-                    <li>
-                        <h3>Nick Aridas</h3>
-                        <p>How does it look? I started making it a while ago</p>
-                    </li>
-
-                    <li>
-                        <h3>Thanos Tzikas</h3>
-                        <p>Goddamn Aliens! &#128514;</p>
-                    </li>
-
-                    <li>
-                        <h3>Charalambos Pistis</h3>
-                        <p>Hello</p>
-                    </li>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </div>
@@ -88,47 +87,40 @@
             <div class="col-content">
                 <section class="message">
                     <div class="grid-message" id="message">
-                        <div class="col-message-received">
-                            <div class="message-received">
-                                <p>Ok.</p>
-                            </div>
-                            <div class="message-received">
-                                <p>Do you play EVE Online?</p>
-                            </div>
-                        </div>
-                        <div class="col-message-sent">
-                            <div class="message-sent">
-                                <p>Not anymore.</p>
-                            </div>
-                        </div>
-                        <div class="col-message-received">
-                            <div class="message-received">
+                        <%
+                            MessagesDAO messagesDAO = new MessagesDAO();
 
-                                <p>But, can you?</p>
-                            </div>
-                        </div>
+                            List<Messages> messagesList = messagesDAO.getAllMessages(user.getId(), currentFriend.getId());
+                            for (Messages message: messagesList) {
+                            	String newMessage = message.getMsg();
+                            	if (message.getSender() == user.getId()) {
+                        %>
                         <div class="col-message-sent">
                             <div class="message-sent">
-                                <p>I guess if I had some practice I could again. It's been years.</p>
+                                <p><%=newMessage%></p>
                             </div>
                         </div>
+                        <%
+                            } else {
+                        %>
                         <div class="col-message-received">
                             <div class="message-received">
-                                <p>Dat titan though...</p>
+                                <p><%=newMessage%></p>
                             </div>
                         </div>
-                        <div class="col-message-sent">
-                            <div class="message-sent">
-                                <p>Trombone, guitar, titan?</p>
-                            </div>
-                        </div>
+                        <%
+                            }
+                            }
+                        %>
                     </div>
                 </section>
             </div>
             <div class="col-foot">
 
                 <div class="compose">
-                    <input placeholder="Type a message">
+                    <form action="${pageContext.request.contextPath}/sendmsg" method="post">
+                        <input name="input-box" placeholder="Type a message">
+                    </form>
                     <div class="compose-dock">
                     </div>
 
@@ -142,8 +134,11 @@
 
                 <div class="user-panel">
 
-                    <h3>Gio Simon</h3>
-                    <p>London, United Kingdom</p>
+                    <h3><%=friendName%></h3>
+                    <p><%=friendEmail%></p>
+                    <form action="${pageContext.request.contextPath}/logout" method="post">
+                        <button type="submit">Log Out</button>
+                    </form>
                 </div>
 
             </div>

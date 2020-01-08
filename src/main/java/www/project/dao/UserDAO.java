@@ -124,7 +124,7 @@ public class UserDAO {
 		query.setParameter("id", id);
 
 		User existingUser = query.uniqueResult();
-		System.out.println(existingUser.getUsername());
+//		System.out.println(existingUser.getUsername());
 
 		return existingUser;
 	}
