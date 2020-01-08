@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import www.project.bean.Messages;
 
@@ -49,8 +50,8 @@ public class MessagesDAO {
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 
-		String hql = "SELECT * FROM messengercool.messages WHERE sender=:sender AND receiver=:receiver";
-		Query<Messages> query = session.createQuery(hql, Messages.class);
+		String hql = "SELECT * FROM messages WHERE sender=:sender AND receiver=:receiver";
+		NativeQuery<Messages> query = session.createNativeQuery(hql, Messages.class);
 		query.setParameter("sender", sender);
 		query.setParameter("receiver", receiver);
 
