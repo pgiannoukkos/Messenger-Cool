@@ -31,7 +31,6 @@ public class MessagesDAO {
 			messages.setReceiver(receiver);
 			messages.setReceiver(sender);
 			messages.setMsg(msg);
-			messages.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
 			session.save(messages);
 			transaction.commit();
