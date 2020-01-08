@@ -30,9 +30,9 @@ public class UserDAO {
 		NativeQuery<Friendship> query = session.createNativeQuery(hql, Friendship.class);
 		query.setParameter("userId", userId);
 
-		List<Friendship> list = query.getResultList();
+		Friendship friendship = query.uniqueResult();
 
-		if (list == null) {
+		if (friendship == null) {
 			System.out.println("\n\n User not Found \n");
 			session.close();
 			sessionFactory.close();
