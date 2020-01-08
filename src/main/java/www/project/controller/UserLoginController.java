@@ -13,7 +13,7 @@ public class UserLoginController extends HttpServlet {
 		String userName = request.getParameter("username").toLowerCase();
 		String password = request.getParameter("password");
 
-		HttpSession session = request.getSession(true);
+		HttpSession httpSession = request.getSession(true);
 
 		try {
 			UserDAO userDAO = new UserDAO();
@@ -22,7 +22,7 @@ public class UserLoginController extends HttpServlet {
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
 				User user = userDAO.getUser(userName);
-				response.addCookie(new Cookie("userId", user.getId().toString()));
+				httpSession.setAttribute("username", user.getUsername());
 				response.sendRedirect("./main.jsp");
 			}
 

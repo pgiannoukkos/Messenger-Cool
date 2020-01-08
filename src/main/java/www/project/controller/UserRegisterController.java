@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -20,7 +19,6 @@ public class UserRegisterController extends HttpServlet {
 		String password = request.getParameter("password");
 		LocalDate birthDate = LocalDate.parse(request.getParameter("birth-date"));
 
-		HttpSession session = request.getSession(true);
 		try {
 			UserDAO userDAO = new UserDAO();
 			if (userDAO.userExists(username, email)) {

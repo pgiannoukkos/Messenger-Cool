@@ -36,19 +36,8 @@
             <div class="right">
                 <div class="username">
                     <%
-                        int userId = 0;
-                        Cookie[] cookies = request.getCookies();
-                        for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("userId"))
-                            	userId = Integer.parseInt(cookie.getValue());
-                        }
                         UserDAO userDAO = new UserDAO();
-                        User user = null;
-                        if (userId != 0) {
-                            user = userDAO.getUser(userId);
-                        }
-//                        PrintWriter writer = response.getWriter();
-//                        writer.println(user.getFirstName() + " " + user.getLastName());
+                        User user = userDAO.getUser((String) session.getAttribute("username"));
                         String full = user.getFirstName() + " " + user.getLastName();
                     %>
                     <%=full%>
