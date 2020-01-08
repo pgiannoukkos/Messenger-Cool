@@ -81,7 +81,7 @@ public class UserDAO {
 		Session session = sessionFactory.openSession();
 
 		String hql = "SELECT username, email FROM user WHERE username=:username OR email=:email";
-		NativeQuery query = session.createSQLQuery(hql);
+		NativeQuery query = session.createNativeQuery(hql);
 		query.setParameter("username", userName);
 		query.setParameter("email", email);
 
@@ -105,10 +105,10 @@ public class UserDAO {
 		Session session = sessionFactory.openSession();
 
 		String hql = "SELECT * FROM user WHERE username=:username";
-		NativeQuery query = session.createNativeQuery(hql, User.class);
+		NativeQuery<User> query = session.createNativeQuery(hql, User.class);
 		query.setParameter("username", userName);
 
-		User existingUser = (User) query.uniqueResult();
+		User existingUser = query.uniqueResult();
 		System.out.println(existingUser.getUsername());
 
 		return existingUser;
@@ -120,10 +120,10 @@ public class UserDAO {
 		Session session = sessionFactory.openSession();
 
 		String hql = "SELECT * FROM user WHERE id=:id";
-		NativeQuery query = session.createNativeQuery(hql, User.class);
+		NativeQuery<User> query = session.createNativeQuery(hql, User.class);
 		query.setParameter("id", id);
 
-		User existingUser = (User) query.uniqueResult();
+		User existingUser = query.uniqueResult();
 		System.out.println(existingUser.getUsername());
 
 		return existingUser;

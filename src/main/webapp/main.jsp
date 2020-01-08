@@ -157,9 +157,5 @@
         </div>
     </main>
 </div>
-
-
-<script src="test.js"></script>
-
 </body>
 </html>

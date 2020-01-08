@@ -5,14 +5,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import www.project.bean.Friendship;
+import org.hibernate.query.Query;
 import www.project.bean.Messages;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class MessagesDAO {
 
-	public void createFriendship(int sender, int receiver, String msg) {
+	public void newMessage(int sender, int receiver, String msg) {
 
 		try {
 			// Configure Hibernate
@@ -42,4 +43,20 @@ public class MessagesDAO {
 		}
 	}
 
+	public List<Messages> getAllMessages(int sender, int receiver) {
+		List<Messages> list;
+
+		Configuration configuration = new Configuration().configure();
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		String hql = "SELECT * FROM messengercool.messages WHERE sender=:sender AND receiver=:receiver";
+		Query<Messages> query = session.createQuery(hql, Messages.class);
+		query.setParameter("sender", sender);
+		query.setParameter("receiver", receiver);
+
+		list = query.getResultList();
+
+		return list;
+	}
 }
