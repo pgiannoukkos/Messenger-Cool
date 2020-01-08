@@ -24,13 +24,21 @@ public class UserLoginController extends HttpServlet {
 				request.setAttribute("message", "Wrong username or password!");
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
-				User user = userDAO.getUser(userName);
-				FriendshipDAO friendshipDAO = new FriendshipDAO();
-				List<Friendship> list = friendshipDAO.getFriendship(user.getId());
-				User firstFriend = userDAO.getUser(list.get(0).getUser1());
-				httpSession.setAttribute("username", user.getUsername());
-				httpSession.setAttribute("friend-uname", firstFriend.getUsername());
-				response.sendRedirect("./main.jsp");
+				if(userDAO.checkUserFriends(userDAO.getUser(userName).getId()) == true) {
+					User user = userDAO.getUser(userName);
+					httpSession.setAttribute("username", user.getUsername());
+					httpSession.setAttribute("friend-uname", "-1");
+					response.sendRedirect("./listUsers.jsp");
+				}
+				else {
+					User user = userDAO.getUser(userName);
+					FriendshipDAO friendshipDAO = new FriendshipDAO();
+					List<Friendship> list = friendshipDAO.getFriendship(user.getId());
+					User firstFriend = userDAO.getUser(list.get(0).getUser1());
+					httpSession.setAttribute("username", user.getUsername());
+					httpSession.setAttribute("friend-uname", firstFriend.getUsername());
+					response.sendRedirect("./main.jsp");
+				}
 			}
 
 		} catch (HibernateException ex) {

@@ -23,8 +23,12 @@
 		<servlet-name>SendmsgServlet</servlet-name>
 		<servlet-class>www.project.controller.SendmsgServlet</servlet-class>
 	</servlet>
+    <servlet>
+        <servlet-name>AddFriendServlet</servlet-name>
+        <servlet-class>www.project.controller.AddFriendServlet</servlet-class>
+    </servlet>
 
-	<servlet-mapping>
+    <servlet-mapping>
 		<servlet-name>UserRegister</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
@@ -47,6 +51,11 @@
 	<servlet-mapping>
 		<servlet-name>SendmsgServlet</servlet-name>
 		<url-pattern>/sendmsg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddFriendServlet</servlet-name>
+		<url-pattern>/addfriend</url-pattern>
 	</servlet-mapping>
 
 </web-app>

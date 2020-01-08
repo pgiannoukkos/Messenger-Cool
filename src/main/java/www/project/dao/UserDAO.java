@@ -6,12 +6,43 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
+import www.project.bean.Friendship;
 import www.project.bean.User;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class UserDAO {
+
+	public boolean checkUserFriends(int userId) {
+
+		// Configure Hibernate
+		Configuration configuration = new Configuration().configure();
+
+		// Create SessionFactory
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+		// Get Session object
+		Session session = sessionFactory.openSession();
+
+		// SQL query
+		String hql = "SELECT * FROM friendships WHERE user1 = :userId";
+		NativeQuery<Friendship> query = session.createNativeQuery(hql, Friendship.class);
+		query.setParameter("userId", userId);
+
+		List<Friendship> list = query.getResultList();
+
+		if (list == null) {
+			System.out.println("\n\n User not Found \n");
+			session.close();
+			sessionFactory.close();
+			return true;
+		}
+
+		session.close();
+		sessionFactory.close();
+		return false;
+	}
 
 	public boolean checkUserLogin(String userName, String password) {
 
@@ -127,5 +158,16 @@ public class UserDAO {
 //		System.out.println(existingUser.getUsername());
 
 		return existingUser;
+	}
+
+	public List<User> getAllUsers() {
+		Configuration configuration = new Configuration().configure();
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		String hql = "SELECT * FROM user";
+		NativeQuery<User> query = session.createNativeQuery(hql, User.class);
+
+		return query.getResultList();
 	}
 }
