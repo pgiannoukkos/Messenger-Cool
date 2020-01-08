@@ -6,10 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
 import www.project.bean.Messages;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class MessagesDAO {

@@ -19,7 +19,8 @@ class MessagesDAOTest {
 		for (Messages message: list) {
 			User sender = userDAO.getUser(message.getSender());
 			User receiver = userDAO.getUser(message.getReceiver());
-			System.out.println(sender.getFirstName() + " to " + receiver.getFirstName() + " : " + message.getMsg());
+			System.out.println(sender.getFirstName() + " to " + receiver.getFirstName() + " : " + message.getMsg()
+			+ " at: " + message.getTimestamp());
 		}
 	}
 
