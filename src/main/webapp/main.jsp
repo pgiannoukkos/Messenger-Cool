@@ -138,6 +138,7 @@
                     <p><%=friendEmail%></p>
                     <form action="${pageContext.request.contextPath}/logout" method="post">
                         <button type="submit">Log Out</button>
+                        <button><a href="listUsers.jsp">Add Friends</a></button>
                     </form>
                 </div>
 
